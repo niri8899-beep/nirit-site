@@ -2,24 +2,9 @@
    CONFIGURATION — Edit these values before deploying
 ═══════════════════════════════════════════════════════ */
 const CONFIG = {
-  // Replace with your WhatsApp number (digits only, country code first)
-  // Example: '972501234567' for Israeli number 050-1234567
   whatsappNumber: '972546904940',
-
-  // ── Email automation ──────────────────────────────────
-  // Option A: EmailJS (https://www.emailjs.com — free tier available)
-  emailjs: {
-    serviceId:  'YOUR_SERVICE_ID',   // EmailJS → Email Services → Service ID
-    templateId: 'YOUR_TEMPLATE_ID',  // EmailJS → Email Templates → Template ID
-    publicKey:  'YOUR_PUBLIC_KEY',   // EmailJS → Account → Public Key
-  },
-
-  // Option B: Formspree (https://formspree.io — free tier available)
-  // Uncomment the line below and set your form endpoint:
-  // formspreeUrl: 'https://formspree.io/f/YOUR_FORM_ID',
-
-  // When true, logs form data to console instead of sending (for testing)
-  devMode: true,
+  webhookUrl: 'https://hook.eu1.make.com/fxvpangbgm5zq4fxabu4t4xfjjmd37pr',
+  devMode: false,
 };
 
 /* ═══════════════════════════════════════════════════════
@@ -225,52 +210,17 @@ function collectFormData(form) {
 async function submitForm(data) {
   if (CONFIG.devMode) {
     console.log('[DEV MODE] Form data:', data);
-    await delay(1200); // simulate network
+    await delay(1200);
     return;
   }
 
-  // ── Option A: EmailJS ─────────────────────────────────
-  // 1. Add this script to <head> in index.html:
-  //    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  // 2. Uncomment the block below:
-  /*
-  if (typeof emailjs !== 'undefined') {
-    await emailjs.send(
-      CONFIG.emailjs.serviceId,
-      CONFIG.emailjs.templateId,
-      {
-        from_name:  data.name,
-        from_email: data.email,
-        phone:      data.phone,
-        // The email template should contain a WhatsApp link button.
-        // Use this URL in your EmailJS template:
-        whatsapp_url: `https://wa.me/${CONFIG.whatsappNumber}`,
-      },
-      CONFIG.emailjs.publicKey
-    );
-    return;
-  }
-  */
-
-  // ── Option B: Formspree ───────────────────────────────
-  // 1. Create account at formspree.io
-  // 2. Set CONFIG.formspreeUrl above
-  // 3. Uncomment the block below:
-  /*
-  const res = await fetch(CONFIG.formspreeUrl, {
+  const res = await fetch(CONFIG.webhookUrl, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   });
-  if (!res.ok) throw new Error('Formspree error');
-  return;
-  */
 
-  // If no service is configured, warn in console
-  console.warn(
-    'No email service configured. Set CONFIG.devMode = false and ' +
-    'uncomment Option A (EmailJS) or Option B (Formspree) in script.js.'
-  );
+  if (!res.ok) throw new Error(`Webhook error: ${res.status}`);
 }
 
 /* ─── Validation ─────────────────────────────────────── */
