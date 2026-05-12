@@ -189,7 +189,7 @@ const CONFIG = {
       phone:     document.getElementById('phone').value.trim(),
       email:     document.getElementById('email').value.trim(),
       source:    'vsl-free-v1',
-      timestamp: now.toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }),
+      timestamp: now.toLocaleString('sv-SE', { timeZone: 'Asia/Jerusalem' }).replace('T', ' '),
     };
 
     try {

@@ -204,7 +204,7 @@ function collectFormData(form) {
     name:      form.querySelector('#name')?.value.trim()  ?? '',
     phone:     form.querySelector('#phone')?.value.trim() ?? '',
     email:     form.querySelector('#email')?.value.trim() ?? '',
-    timestamp: now.toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }),
+    timestamp: now.toLocaleString('sv-SE', { timeZone: 'Asia/Jerusalem' }).replace('T', ' '),
   };
 }
 
