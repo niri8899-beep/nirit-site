@@ -199,10 +199,12 @@ function initForm() {
 
 /* ─── Collect form data ──────────────────────────────── */
 function collectFormData(form) {
+  const now = new Date();
   return {
-    name:  form.querySelector('#name')?.value.trim()  ?? '',
-    phone: form.querySelector('#phone')?.value.trim() ?? '',
-    email: form.querySelector('#email')?.value.trim() ?? '',
+    name:      form.querySelector('#name')?.value.trim()  ?? '',
+    phone:     form.querySelector('#phone')?.value.trim() ?? '',
+    email:     form.querySelector('#email')?.value.trim() ?? '',
+    timestamp: now.toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }),
   };
 }
 

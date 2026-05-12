@@ -8,6 +8,7 @@
 const CONFIG = {
   CARDCOM_URL:      'https://secure.cardcom.solutions/YOUR_PAYMENT_LINK',
   WHATSAPP_NUMBER:  'https://wa.me/972501234567',
+  WEBHOOK_URL:      'https://hook.eu1.make.com/gxrm2yxqub5gui2h6gtgg04wjg7qinme',
 };
 
 // ---------- FOOTER YEAR ----------
@@ -181,18 +182,22 @@ const CONFIG = {
     submitBtn.classList.add('loading');
     submitBtn.disabled = true;
 
-    // collect data (for optional server call)
+    // collect data
+    const now = new Date();
     const data = {
-      name:    document.getElementById('name').value.trim(),
-      phone:   document.getElementById('phone').value.trim(),
-      email:   document.getElementById('email').value.trim(),
-      source:  'sos-landing-v1',
-      date:    new Date().toISOString(),
+      name:      document.getElementById('name').value.trim(),
+      phone:     document.getElementById('phone').value.trim(),
+      email:     document.getElementById('email').value.trim(),
+      source:    'vsl-free-v1',
+      timestamp: now.toLocaleString('he-IL', { timeZone: 'Asia/Jerusalem' }),
     };
 
     try {
-      // Optional: POST to your CRM / webhook before redirect
-      // await fetch('/api/leads', { method: 'POST', body: JSON.stringify(data), headers: { 'Content-Type': 'application/json' } });
+      await fetch(CONFIG.WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
       // Show success state
       form.hidden = true;
