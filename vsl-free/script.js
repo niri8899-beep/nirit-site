@@ -6,7 +6,7 @@
 
 // ---------- PLACEHOLDERS (replace before going live) ----------
 const CONFIG = {
-  CARDCOM_URL:      'https://secure.cardcom.solutions/YOUR_PAYMENT_LINK',
+  CARDCOM_URL:      'https://secure.cardcom.solutions/EA/EA5/MCD2309kZEqDG4TXSeLApQ/Intro',
   WHATSAPP_NUMBER:  'https://wa.me/972501234567',
   WEBHOOK_URL:      'https://hook.eu1.make.com/gxrm2yxqub5gui2h6gtgg04wjg7qinme',
 };
