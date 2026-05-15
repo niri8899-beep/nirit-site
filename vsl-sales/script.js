@@ -269,10 +269,12 @@ if (form) {
     submitBtn.setAttribute('data-loading', 'true');
     submitBtn.disabled = true;
 
+    const now = new Date();
     const data = {
       name:  qs('#field-name').value.trim(),
       phone: qs('#field-phone').value.trim(),
       email: qs('#field-email').value.trim(),
+      timestamp: now.toLocaleString('sv-SE', { timeZone: 'Asia/Jerusalem' }).replace('T', ' '),
     };
 
     // ── Send to endpoint (skip if placeholder) ──
