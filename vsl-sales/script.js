@@ -25,7 +25,7 @@
  * ────────────────────────────────────────────────────────────── */
 
 // PLACEHOLDER: replace with real endpoint when ready
-const FORM_ENDPOINT = '#FORM_ACTION_URL';
+const FORM_ENDPOINT = 'https://hook.eu1.make.com/hjgn65sccytzsffmpkp77evkldvg1wqw';
 
 /* ── Utility ────────────────────────────────────────────────── */
 const qs  = (sel, ctx = document) => ctx.querySelector(sel);
