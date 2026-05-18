@@ -138,13 +138,13 @@ document.querySelectorAll('.faq-question').forEach((btn) => {
   });
 });
 
-/* ── Registration form + redirect to Cardcom ─
-   Validates name / phone / email, then builds
-   the Cardcom URL with the user's details and
-   redirects. Replace https://secure.cardcom.solutions/EA/EA5/kK6Gj8Q4kqZhMKpdPjHLg/Intro
-   with your real Cardcom link.
+/* ── Registration form + redirect to course portal ─
+   Validates name / phone / email, then redirects to
+   the course portal purchase page with the email
+   pre-filled. The portal handles payment (Cardcom)
+   and account creation.
    ─────────────────────────────────────────── */
-const CARDCOM_URL = 'https://secure.cardcom.solutions/EA/EA5/kK6Gj8Q4kqZhMKpdPjHLg/Intro';
+const PORTAL_PURCHASE_URL = 'https://course-portal-iota.vercel.app/purchase';
 
 const regForm  = document.getElementById('register-form');
 
@@ -209,43 +209,15 @@ if (regForm) {
     if (!validateForm(name, phone, email)) return;
 
     // ── Analytics hooks (uncomment & configure as needed) ──
-    // gtag('event', 'begin_checkout', { event_category: 'CTA', event_label: 'Cardcom' });
+    // gtag('event', 'begin_checkout', { event_category: 'CTA', event_label: 'Portal' });
     // fbq('track', 'InitiateCheckout');
 
-    // Build redirect URL — Cardcom accepts query params for pre-filling
-    const params = new URLSearchParams({
-      Name:  name.trim(),
-      Phone: phone.trim(),
-      Email: email.trim(),
-    });
-
-    const destination = CARDCOM_URL.includes('PLACEHOLDER')
-      ? '#'  // safety fallback while URL not set
-      : `${CARDCOM_URL}?${params.toString()}`;
-
-    if (CARDCOM_URL.includes('PLACEHOLDER')) {
-      console.warn('[אנגלית בקלות] Cardcom URL not set. Replace https://secure.cardcom.solutions/EA/EA5/kK6Gj8Q4kqZhMKpdPjHLg/Intro in script.js.');
-      alert('הטופס מוכן! יש להגדיר את כתובת קארדקום בקוד לפני הפרסום.');
-      return;
-    }
+    // Redirect to the course portal purchase page with the email pre-filled.
+    const destination = `${PORTAL_PURCHASE_URL}?email=${encodeURIComponent(email.trim())}`;
 
     window.location.href = destination;
   });
 }
-
-/* ── Post-purchase email automation placeholder ──
-   After a successful Cardcom payment, Cardcom
-   can send a webhook or redirect to a success
-   URL. Wire that URL to your email provider
-   (e.g. ConvertKit, ActiveCampaign, or a custom
-   server endpoint) to deliver course access.
-
-   Example flow:
-     1. Cardcom redirects to: /thank-you?status=success&email=...
-     2. Your server receives the webhook, sends access email.
-
-   COURSE_DELIVERY_AUTOMATION_PLACEHOLDER
-   ─────────────────────────────────────────── */
 
 /* ── Privacy policy modal ────────────────────── */
 (function initPrivacyModal() {
