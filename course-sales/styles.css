@@ -391,12 +391,12 @@ ul, ol { list-style: none; }
 }
 
 .problem-close {
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
   color: var(--green-dark);
   background: var(--green-light);
   border-radius: var(--radius-md);
-  padding: 16px 28px;
+  padding: 24px 40px;
   display: inline-block;
 }
 
@@ -404,9 +404,23 @@ ul, ol { list-style: none; }
    INTRO SECTION
    ============================================= */
 .intro-inner {
-  max-width: 760px;
-  margin: 0 auto;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+.intro-text {
+  flex: 1;
+  text-align: right;
+}
+.intro-image {
+  flex-shrink: 0;
+  width: 260px;
+}
+.intro-image img {
+  width: 100%;
+  border-radius: 16px;
+  display: block;
+  object-fit: cover;
 }
 .intro-body {
   font-size: 1.05rem;
@@ -415,6 +429,17 @@ ul, ol { list-style: none; }
   line-height: 1.8;
 }
 .intro-cta { margin-top: 16px; }
+
+@media (max-width: 768px) {
+  .intro-inner {
+    flex-direction: column;
+  }
+  .intro-image {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
 
 /* =============================================
    OUTCOMES SECTION
@@ -436,7 +461,7 @@ ul, ol { list-style: none; }
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  background: var(--white);
+  background: #f7e88a;
   border-radius: var(--radius-md);
   padding: 20px 22px;
   box-shadow: var(--shadow-sm);
@@ -523,11 +548,11 @@ ul, ol { list-style: none; }
   margin: 0 auto;
   text-align: center;
   font-size: 1rem;
-  color: var(--text-muted);
-  background: var(--green-pale);
+  color: #111111;
+  background: #badb72;
   border-radius: var(--radius-lg);
   padding: 24px 32px;
-  border: 1px solid var(--green-light);
+  border: 1px solid #badb72;
 }
 
 /* =============================================
