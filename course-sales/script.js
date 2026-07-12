@@ -212,8 +212,10 @@ if (regForm) {
     // gtag('event', 'begin_checkout', { event_category: 'CTA', event_label: 'Portal' });
     // fbq('track', 'InitiateCheckout');
 
-    // Redirect to the course portal purchase page with the email pre-filled.
-    const destination = `${PORTAL_PURCHASE_URL}?email=${encodeURIComponent(email.trim())}`;
+    // Redirect to the course portal purchase page with details pre-filled.
+    const destination = `${PORTAL_PURCHASE_URL}?email=${encodeURIComponent(email.trim())}`
+      + `&name=${encodeURIComponent(name.trim())}`
+      + `&phone=${encodeURIComponent(phone.trim())}`;
 
     window.location.href = destination;
   });
